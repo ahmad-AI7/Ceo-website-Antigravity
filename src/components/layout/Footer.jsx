@@ -1,106 +1,348 @@
 import { motion } from 'framer-motion';
+import { FaLinkedinIn, FaTwitter, FaInstagram, FaFacebookF } from 'react-icons/fa';
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
+import { BsArrowUpRight, BsArrowRight } from 'react-icons/bs';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
+    const socialLinks = [
+        { icon: FaLinkedinIn, href: '#', label: 'LinkedIn', color: 'hover:text-accent' },
+        { icon: FaTwitter, href: '#', label: 'Twitter', color: 'hover:text-accent' },
+        { icon: FaInstagram, href: '#', label: 'Instagram', color: 'hover:text-accent' },
+        { icon: FaFacebookF, href: '#', label: 'Facebook', color: 'hover:text-accent' }
+    ];
+
+    const services = [
+        'C-Suite Advisory',
+        'Board Governance',
+        'Strategic Planning',
+        'Business Transformation',
+        'Digital Innovation',
+        'Leadership Development'
+    ];
+
+    const quickLinks = [
+        { label: 'About', href: '#about' },
+        { label: 'Services', href: '#services' },
+        { label: 'Portfolio', href: '#portfolio' },
+        { label: 'Testimonials', href: '#testimonials' },
+        { label: 'Blog', href: '#blog' },
+        { label: 'Contact', href: '#contact' }
+    ];
+
     return (
-        <footer className="bg-black pt-32 pb-12">
-            <div className="container mx-auto px-6">
-                {/* Contact Form Section exactly like Original */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-24 mb-32">
-                    <div>
-                        <p className="text-[10px] tracking-[0.5em] text-white/40 mb-10 uppercase font-bold">
-                            EXCEED YOUR POTENTIAL
+        <footer className="relative w-full bg-gradient-to-b from-black via-neutral-950 to-black overflow-hidden">
+            <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-20 lg:pt-32">
+                {/* Main Content */}
+                <div className="flex-grow">
+                    {/* Hero CTA Section */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="text-center mb-24 lg:mb-32"
+                    >
+                        <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 tracking-tight">
+                            Ready to <span className="text-accent">Transform</span> Your Business?
+                        </h2>
+                        <p className="text-base lg:text-lg text-white/50 mb-12 max-w-2xl mx-auto tracking-wide">
+                            Let's collaborate to unlock unprecedented growth and innovation for your organization
                         </p>
-                        <div className="space-y-6 mb-16">
-                            <a href="tel:+923000369622" className="block text-xl font-light text-white hover:text-accent transition-colors">
-                                +92 300 0369622
-                            </a>
-                            <a href="mailto:hello@sheikhnabeel.com" className="block text-xl font-light text-white hover:text-accent transition-colors uppercase">
-                                hello@sheikhnabeel.com
-                            </a>
-                        </div>
-                        <a href="#" className="inline-flex items-center space-x-6 group text-accent">
-                            <span className="w-12 h-[1px] bg-accent group-hover:w-20 transition-all duration-500"></span>
-                            <span className="text-[10px] font-bold tracking-[0.3em] uppercase">/ BOOK AN APPOINTMENT /</span>
-                        </a>
-                    </div>
+                        <motion.a
+                            href="#contact"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center gap-4 bg-accent text-black px-12 py-5 rounded-full font-bold tracking-wider uppercase text-sm shadow-2xl shadow-accent/20 hover:shadow-accent/40 transition-all duration-300"
+                        >
+                            Let's Talk
+                            <BsArrowUpRight className="text-lg" />
+                        </motion.a>
+                    </motion.div>
 
-                    <div>
-                        <form className="space-y-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="flex items-center space-x-4">
-                                    <input type="checkbox" id="csuite" className="accent-accent w-4 h-4" />
-                                    <label htmlFor="csuite" className="text-[10px] tracking-widest text-white/60 uppercase">C-Suite Advisory</label>
-                                </div>
-                                <div className="flex items-center space-x-4">
-                                    <input type="checkbox" id="ned" className="accent-accent w-4 h-4" />
-                                    <label htmlFor="ned" className="text-[10px] tracking-widest text-white/60 uppercase">NED Independent Board Director</label>
+                    {/* Contact Section */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 mb-24 lg:mb-32"
+                    >
+                        {/* Left Column - Contact Info */}
+                        <div className="space-y-12">
+                            <div>
+                                <p className="text-[10px] tracking-[0.5em] text-accent/60 mb-12 uppercase font-bold flex items-center gap-3">
+                                    <span className="w-12 h-[1px] bg-accent/60"></span>
+                                    EXCEED YOUR POTENTIAL
+                                </p>
+                                <div className="space-y-8">
+                                    <a
+                                        href="tel:+923000369622"
+                                        className="group flex items-center gap-4 text-2xl lg:text-3xl font-light text-white hover:text-accent transition-all duration-300 tracking-wide"
+                                    >
+                                        <HiOutlinePhone className="text-accent group-hover:rotate-12 transition-transform" />
+                                        +92 300 0369622
+                                    </a>
+                                    <a
+                                        href="mailto:hello@sheikhnabeel.com"
+                                        className="group flex items-center gap-4 text-xl lg:text-2xl font-light text-white hover:text-accent transition-all duration-300 uppercase tracking-wide"
+                                    >
+                                        <HiOutlineMail className="text-accent group-hover:scale-110 transition-transform" />
+                                        hello@sheikhnabeel.com
+                                    </a>
+                                    <div className="group flex items-start gap-4 text-base text-white/60 mt-8">
+                                        <HiOutlineLocationMarker className="text-accent mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                                        <span className="tracking-wide leading-relaxed">
+                                            Office 509, 5th Floor, Kohistan Tower<br />
+                                            Saddar, Rawalpindi, 46000, Pakistan
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="relative">
-                                <textarea
-                                    placeholder="MESSAGE"
-                                    rows="4"
-                                    className="w-full bg-white/5 border border-white/10 p-6 text-sm text-white focus:border-accent outline-none tracking-widest uppercase transition-colors"
-                                ></textarea>
+
+                            {/* Social Media Links */}
+                            <div className="pt-8 border-t border-white/5">
+                                <p className="text-[10px] tracking-[0.4em] text-white/40 mb-6 uppercase font-bold">Connect With Us</p>
+                                <div className="flex gap-4">
+                                    {socialLinks.map((social, index) => (
+                                        <motion.a
+                                            key={index}
+                                            href={social.href}
+                                            whileHover={{ y: -4 }}
+                                            className={`w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 ${social.color} transition-all duration-300 backdrop-blur-sm hover:bg-white/10 hover:border-white/20`}
+                                            aria-label={social.label}
+                                        >
+                                            <social.icon className="text-lg" />
+                                        </motion.a>
+                                    ))}
+                                </div>
                             </div>
-                            <button className="flex items-center space-x-6 group text-white">
-                                <span className="w-12 h-[1px] bg-white group-hover:bg-accent group-hover:w-20 transition-all duration-500"></span>
-                                <span className="text-[10px] font-bold tracking-[0.3em] uppercase">/ SUBMIT /</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                {/* Global Footer info */}
-                <div className="pt-24 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-16 mb-24 items-start">
-                    <div>
-                        <h4 className="text-[10px] tracking-[0.5em] font-bold text-white mb-8 uppercase">Keep in touch!</h4>
-                        <div className="relative max-w-xs">
-                            <input type="email" placeholder="Your email" className="w-full bg-white/5 border-b border-white/20 pb-4 text-[10px] tracking-widest text-white focus:border-accent outline-none" />
-                            <button className="absolute right-0 bottom-4 text-white hover:text-accent group">
-                                <span className="sr-only">Submit</span>
-                                <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                            </button>
                         </div>
-                    </div>
 
-                    <div className="flex justify-center">
-                        <div className="text-center">
-                            <div className="flex items-center justify-center space-x-3 mb-8">
+                        {/* Right Column - Contact Form */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="backdrop-blur-sm bg-white/[0.02] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl"
+                        >
+                            <form className="space-y-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="FULL NAME"
+                                            className="w-full bg-white/5 border border-white/10 px-6 py-4 text-sm text-white placeholder:text-white/30 focus:border-accent focus:bg-white/10 outline-none tracking-wider uppercase transition-all duration-300 rounded-xl"
+                                        />
+                                    </div>
+                                    <div className="relative">
+                                        <input
+                                            type="email"
+                                            placeholder="EMAIL ADDRESS"
+                                            className="w-full bg-white/5 border border-white/10 px-6 py-4 text-sm text-white placeholder:text-white/30 focus:border-accent focus:bg-white/10 outline-none tracking-wider uppercase transition-all duration-300 rounded-xl"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <p className="text-[10px] tracking-[0.3em] text-white/40 uppercase font-bold mb-4">Services Interested In</p>
+                                    <div className="grid grid-cols-1 gap-4">
+                                        <div className="flex items-center space-x-4 group cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                id="csuite"
+                                                className="w-5 h-5 accent-accent cursor-pointer transition-transform group-hover:scale-110"
+                                            />
+                                            <label
+                                                htmlFor="csuite"
+                                                className="text-xs tracking-[0.2em] text-white/50 group-hover:text-white/80 uppercase transition-colors cursor-pointer"
+                                            >
+                                                C-Suite Advisory
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center space-x-4 group cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                id="ned"
+                                                className="w-5 h-5 accent-accent cursor-pointer transition-transform group-hover:scale-110"
+                                            />
+                                            <label
+                                                htmlFor="ned"
+                                                className="text-xs tracking-[0.2em] text-white/50 group-hover:text-white/80 uppercase transition-colors cursor-pointer"
+                                            >
+                                                NED Independent Board Director
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="relative">
+                                    <textarea
+                                        placeholder="TELL US ABOUT YOUR PROJECT"
+                                        rows="5"
+                                        className="w-full bg-white/5 border border-white/10 p-6 text-sm text-white placeholder:text-white/30 focus:border-accent focus:bg-white/10 outline-none tracking-wider uppercase transition-all duration-300 resize-none rounded-xl"
+                                    ></textarea>
+                                </div>
+
+                                <motion.button
+                                    type="submit"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="w-full flex items-center justify-center gap-4 bg-accent text-black px-8 py-5 font-bold tracking-[0.3em] uppercase text-xs rounded-xl shadow-lg shadow-accent/20 hover:shadow-accent/40 transition-all duration-300"
+                                >
+                                    Send Message
+                                    <BsArrowRight className="text-lg" />
+                                </motion.button>
+                            </form>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Decorative Divider */}
+                    <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20"></div>
+
+                    {/* Info Grid */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-24"
+                    >
+                        {/* Brand */}
+                        <div className="space-y-8 lg:col-span-1">
+                            <div className="flex items-center gap-4">
                                 <img
                                     src="https://sheikhnabeel.com/wp-content/uploads/2025/04/1-1-1536x1536.png"
-                                    alt="Sheikh Nabeel Logo"
-                                    className="w-10 h-10 rounded-full object-cover border border-white/20"
+                                    alt="Sheikh Nabeel"
+                                    className="w-14 h-14 rounded-full object-cover border-2 border-accent/30 shadow-xl shadow-accent/10"
                                 />
-                                <span className="text-xl font-bold tracking-widest text-white">SHEIKH NABEEL</span>
+                                <span className="text-xl font-bold tracking-[0.2em] text-white">
+                                    SHEIKH<br />NABEEL
+                                </span>
                             </div>
-                            <div className="space-y-2">
-                                <p className="text-[10px] tracking-widest text-white/40 uppercase">+92 300 0369622</p>
-                                <p className="text-[10px] tracking-widest text-white/40 uppercase">hello@sheikhnabeel.com</p>
+                            <p className="text-xs text-white/40 leading-relaxed tracking-wide">
+                                Empowering executives and organizations to achieve unprecedented success through strategic advisory and transformational leadership.
+                            </p>
+                        </div>
+
+                        {/* Quick Links */}
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] tracking-[0.5em] font-bold text-white/60 uppercase flex items-center gap-3">
+                                <span className="w-8 h-[1px] bg-accent/60"></span>
+                                Quick Links
+                            </h4>
+                            <ul className="space-y-3">
+                                {quickLinks.map((link, index) => (
+                                    <li key={index}>
+                                        <a
+                                            href={link.href}
+                                            className="group flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-300 tracking-wide"
+                                        >
+                                            <BsArrowRight className="text-accent group-hover:translate-x-1 transition-transform text-xs" />
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Services */}
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] tracking-[0.5em] font-bold text-white/60 uppercase flex items-center gap-3">
+                                <span className="w-8 h-[1px] bg-accent/60"></span>
+                                Services
+                            </h4>
+                            <ul className="space-y-3">
+                                {services.map((service, index) => (
+                                    <li key={index}>
+                                        <a
+                                            href="#services"
+                                            className="group flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-300 tracking-wide"
+                                        >
+                                            <BsArrowRight className="text-accent group-hover:translate-x-1 transition-transform text-xs" />
+                                            {service}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Newsletter */}
+                        <div className="space-y-6">
+                            <h4 className="text-[10px] tracking-[0.5em] font-bold text-white/60 uppercase flex items-center gap-3">
+                                <span className="w-8 h-[1px] bg-accent/60"></span>
+                                Newsletter
+                            </h4>
+                            <p className="text-xs text-white/40 leading-relaxed tracking-wide">
+                                Subscribe to receive exclusive insights, industry trends, and leadership strategies.
+                            </p>
+                            <div className="relative">
+                                <input
+                                    type="email"
+                                    placeholder="YOUR EMAIL"
+                                    className="w-full bg-white/5 border border-white/10 px-6 py-4 pr-12 text-xs text-white placeholder:text-white/30 focus:border-accent outline-none transition-colors duration-300 rounded-xl tracking-wider"
+                                />
+                                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-accent transition-colors duration-300 group">
+                                    <BsArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </div>
+                            <div className="flex items-center gap-2 text-[9px] text-white/30 tracking-wide">
+                                <input type="checkbox" className="w-3 h-3 accent-accent" id="privacy" />
+                                <label htmlFor="privacy">I agree to the privacy policy</label>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
+                </div>
 
-                    <div className="md:text-right">
-                        <p className="text-[10px] tracking-widest leading-relaxed text-white/40 uppercase mb-4">
-                            Sheikh Nabeel <br />
-                            Office 509, 5th Floor, Kohistan Tower <br />
-                            Saddar, Rawalpindi, 46000, Pakistan
+                {/* Scroll to Top Button */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                    className="pt-12 border-t border-white/5 flex justify-center"
+                >
+                    <motion.button
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-14 h-14 rounded-full bg-accent text-black flex items-center justify-center shadow-2xl shadow-accent/30 hover:shadow-accent/50 transition-all duration-300"
+                        aria-label="Scroll to top"
+                    >
+                        <BsArrowUpRight className="text-2xl rotate-[-45deg]" />
+                    </motion.button>
+                </motion.div>
+
+                {/* Bottom Bar */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                    className="pt-8 pb-8"
+                >
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                        <p className="text-[9px] tracking-[0.3em] text-white/20 uppercase font-medium">
+                            © {currentYear} Sheikh Nabeel Executive Advisory. Crafted with Excellence.
                         </p>
+                        <div className="flex items-center flex-wrap justify-center gap-8 md:gap-12">
+                            <a href="#terms" className="text-[9px] tracking-[0.3em] text-white/20 hover:text-white/60 transition-colors uppercase group flex items-center gap-2">
+                                Terms & Conditions
+                                <BsArrowUpRight className="text-[8px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                            <a href="#privacy" className="text-[9px] tracking-[0.3em] text-white/20 hover:text-white/60 transition-colors uppercase group flex items-center gap-2">
+                                Privacy Policy
+                                <BsArrowUpRight className="text-[8px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                            <a href="#cookies" className="text-[9px] tracking-[0.3em] text-white/20 hover:text-white/60 transition-colors uppercase group flex items-center gap-2">
+                                Cookie Policy
+                                <BsArrowUpRight className="text-[8px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-
-                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-[9px] tracking-widest text-white/20 uppercase font-medium">
-                        © {currentYear} Sheikh Nabeel Executive Advisory. All rights reserved.
-                    </p>
-                    <div className="flex space-x-12">
-                        <a href="#" className="text-[9px] tracking-widest text-white/20 hover:text-white transition-colors uppercase">Terms & Conditions</a>
-                        <a href="#" className="text-[9px] tracking-widest text-white/20 hover:text-white transition-colors uppercase">Privacy Policy</a>
-                    </div>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );

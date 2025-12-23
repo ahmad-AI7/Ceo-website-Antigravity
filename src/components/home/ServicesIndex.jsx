@@ -63,9 +63,9 @@ const ServicesIndex = () => {
 
     return (
         <section ref={targetRef} className="relative h-[300vh] bg-black">
-            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                {/* Header */}
-                <div className="absolute top-12 left-8 lg:left-16 z-10">
+            <div className="sticky top-0 flex flex-col h-screen overflow-hidden">
+                {/* Header Section */}
+                <div className="pt-16 pb-8 px-8 lg:px-16">
                     <div className="inline-block mb-4">
                         <span className="text-[10px] tracking-[0.3em] text-white/40 uppercase font-medium">What I Do</span>
                         <div className="w-12 h-[1px] bg-gradient-to-r from-white/50 to-transparent mt-2"></div>
@@ -76,67 +76,64 @@ const ServicesIndex = () => {
                     </h2>
                 </div>
 
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-12 right-8 lg:right-16 z-10 hidden lg:flex items-center space-x-4">
-                    <span className="text-[10px] tracking-widest text-white/30 uppercase">Scroll to explore</span>
-                    <div className="w-16 h-[1px] bg-gradient-to-r from-white/30 to-transparent"></div>
-                </div>
+                {/* Carousel Container */}
+                <div className="flex-1 flex items-center overflow-hidden relative">
+                    {/* Horizontal Scrolling Cards */}
+                    <motion.div ref={contentRef} style={{ x }} className="flex gap-8 pl-8 pr-8 lg:gap-12 lg:pl-16 lg:pr-16">
+                        {services.map((service, idx) => (
+                            <div
+                                key={idx}
+                                className="relative h-[65vh] w-[75vw] md:w-[55vw] lg:w-[38vw] flex-shrink-0 group"
+                            >
+                                {/* Card Container */}
+                                <div className="relative h-full bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+                                    {/* Image Section */}
+                                    <div className="relative h-1/2 overflow-hidden">
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        {/* Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
 
-                {/* Horizontal Scrolling Cards */}
-                <motion.div ref={contentRef} style={{ x }} className="flex gap-8 pl-8 pr-8 lg:gap-12 lg:pl-16 lg:pr-16">
-                    {services.map((service, idx) => (
-                        <div
-                            key={idx}
-                            className="relative h-[70vh] w-[85vw] md:w-[70vw] lg:w-[50vw] flex-shrink-0 group"
-                        >
-                            {/* Card Container */}
-                            <div className="relative h-full bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-                                {/* Image Section */}
-                                <div className="relative h-1/2 overflow-hidden">
-                                    <img
-                                        src={service.image}
-                                        alt={service.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    {/* Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-
-                                    {/* Service Number */}
-                                    <div className="absolute top-6 right-6">
-                                        <span className="text-6xl font-light text-white/20">{service.number}</span>
-                                    </div>
-                                </div>
-
-                                {/* Content Section */}
-                                <div className="h-1/2 p-8 lg:p-10 flex flex-col justify-between">
-                                    <div>
-                                        <h3 className="text-2xl lg:text-3xl font-light text-white mb-4 leading-tight">
-                                            {service.title}
-                                        </h3>
-                                        <p className="text-sm text-white/60 leading-relaxed">
-                                            {service.description}
-                                        </p>
-                                    </div>
-
-                                    {/* CTA Link */}
-                                    <Link
-                                        to={service.link}
-                                        className="group/link inline-flex items-center space-x-3 text-white self-start mt-6"
-                                    >
-                                        <span className="text-xs font-medium tracking-wide">Learn More</span>
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-8 h-[1px] bg-white/40 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-300"></div>
-                                            <ArrowRight className="w-4 h-4 text-white/40 group-hover/link:text-white group-hover/link:translate-x-1 transition-all duration-300" />
+                                        {/* Service Number */}
+                                        <div className="absolute top-6 right-6">
+                                            <span className="text-6xl font-light text-white/20">{service.number}</span>
                                         </div>
-                                    </Link>
-                                </div>
+                                    </div>
 
-                                {/* Hover Border Effect */}
-                                <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/20 rounded-2xl transition-all duration-500 pointer-events-none"></div>
+                                    {/* Content Section */}
+                                    <div className="h-1/2 p-8 lg:p-10 flex flex-col justify-between">
+                                        <div>
+                                            <h3 className="text-2xl lg:text-3xl font-light text-white mb-4 leading-tight">
+                                                {service.title}
+                                            </h3>
+                                            <p className="text-sm text-white/60 leading-relaxed">
+                                                {service.description}
+                                            </p>
+                                        </div>
+
+                                        {/* CTA Link */}
+                                        <Link
+                                            to={service.link}
+                                            className="group/link inline-flex items-center space-x-3 text-white self-start mt-6"
+                                        >
+                                            <span className="text-xs font-medium tracking-wide">Learn More</span>
+                                            <div className="flex items-center space-x-2">
+                                                <div className="w-8 h-[1px] bg-white/40 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-300"></div>
+                                                <ArrowRight className="w-4 h-4 text-white/40 group-hover/link:text-white group-hover/link:translate-x-1 transition-all duration-300" />
+                                            </div>
+                                        </Link>
+                                    </div>
+
+                                    {/* Hover Border Effect */}
+                                    <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/20 rounded-2xl transition-all duration-500 pointer-events-none"></div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const PortfolioSummary = () => {
     const targetRef = useRef(null);
@@ -12,83 +14,144 @@ const PortfolioSummary = () => {
             title: "Scaled Operations for a Global eCommerce Brand",
             description: "Implemented ClickUp & Airtable systems to manage tasks, automate workflows, and improve team accountability – reducing operational overhead by 30%.",
             category: "Operations",
+            result: "30% Cost Reduction",
             id: "01"
         },
         {
             title: "CRM Overhaul for a UAE Business Consultancy",
             description: "Set up and optimized Zoho CRM, improving lead management and client communication across departments, resulting in a 2x increase in conversion rates.",
             category: "CRM",
+            result: "2x Conversion Rate",
             id: "02"
         },
         {
             title: "Digital Transformation for a Remote Marketing Agency",
             description: "Led the integration of Zapier and AI tools to automate repetitive tasks and reporting, saving 20+ hours weekly for the core team.",
             category: "Automation",
+            result: "20+ Hours Saved/Week",
             id: "03"
         },
         {
             title: "Brand Strategy for a Fast-Growing Startup",
             description: "Developed brand identity, customer journey mapping, and go-to-market strategy – helping the startup secure its first round of funding.",
             category: "Brand Strategy",
+            result: "Funding Secured",
             id: "04"
         },
         {
             title: "KPI Dashboards for a Leadership Team",
             description: "Built real-time tracking dashboards using Notion & Google Data Studio, giving executives data-driven insights for faster decision-making.",
             category: "Analytics",
+            result: "Real-time Insights",
             id: "05"
         }
     ];
 
-    // Calculate Y translation to scroll the list upwards
-    // We scroll from 0 to -X%, where X is enough to show all items
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
     return (
-        <section ref={targetRef} className="relative h-[300vh] bg-black">
-            <div className="sticky top-0 h-screen overflow-hidden flex flex-col md:flex-row">
-                {/* Left Side: Fixed Header - Top Aligned */}
-                <div className="w-full md:w-1/3 p-12 md:p-24 flex flex-col justify-start z-10 bg-black h-full">
-                    <p className="text-[10px] tracking-[0.5em] text-accent font-bold uppercase mb-4">MY PORTFOLIO</p>
-                    <h2 className="text-3xl md:text-5xl font-light text-white uppercase tracking-tight leading-tight">
-                        RECENT WORK <br /> COMPLETED
-                    </h2>
-                    <div className="mt-12 hidden md:block">
-                        <a href="#" className="inline-flex items-center space-x-4 group text-white">
-                            <span className="text-[10px] font-bold tracking-[0.3em] uppercase">VIEW ALL PROJECTS</span>
-                            <span className="w-8 h-[1px] bg-white group-hover:w-12 transition-all duration-300"></span>
-                        </a>
+        <section ref={targetRef} className="relative h-[300vh] bg-gradient-to-b from-black via-[#0a0a09] to-black">
+            <div className="sticky top-0 h-screen overflow-hidden flex flex-col lg:flex-row">
+                {/* Left Side: Fixed Header */}
+                <div className="w-full lg:w-2/5 p-8 lg:p-16 flex flex-col justify-start z-10 bg-gradient-to-br from-black to-[#0a0a09] h-full border-r border-white/5">
+                    <div className="max-w-lg">
+                        {/* Badge */}
+                        <div className="inline-block mb-6">
+                            <div className="flex items-center space-x-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
+                                <TrendingUp className="w-3 h-3 text-white/40" />
+                                <span className="text-[10px] tracking-[0.3em] text-white/40 uppercase font-medium">Portfolio</span>
+                            </div>
+                        </div>
+
+                        {/* Heading */}
+                        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-light text-white tracking-tight leading-tight mb-6">
+                            Recent Work &<br />
+                            <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+                                Success Stories
+                            </span>
+                        </h2>
+
+                        {/* Description */}
+                        <p className="text-base text-white/50 leading-relaxed mb-12">
+                            Delivering measurable results across operations, automation, and strategic growth initiatives for businesses worldwide.
+                        </p>
+
+                        {/* CTA */}
+                        <div className="hidden lg:block">
+                            <Link
+                                to="/portfolio"
+                                className="group inline-flex items-center space-x-3 px-6 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                            >
+                                <span className="text-sm font-medium text-white tracking-wide">View All Projects</span>
+                                <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                            </Link>
+                        </div>
+
+                        {/* Scroll Indicator */}
+                        <div className="mt-auto pt-12 hidden lg:block">
+                            <div className="flex items-center space-x-4">
+                                <span className="text-[10px] tracking-widest text-white/30 uppercase">Scroll to explore</span>
+                                <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {/* Right Side: Scrolling List */}
-                <div className="w-full md:w-2/3 h-full flex items-center relative">
-                    {/* Padding Top matches Sidebar padding to align '01' with 'MY PORTFOLIO' approx */}
-                    <motion.div style={{ y }} className="w-full px-6 md:px-24 pt-12 md:pt-24 pb-[5vh]">
+                <div className="w-full lg:w-3/5 h-full flex items-center relative overflow-hidden">
+                    <motion.div style={{ y }} className="w-full px-6 lg:px-12 xl:px-16 pt-12 lg:pt-20 pb-[10vh]">
                         {works.map((work, idx) => (
-                            <div key={idx} className="group border-b border-white/10 py-16 last:border-0 relative">
-                                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative z-10">
-                                    <div className="md:col-span-2">
-                                        <span className="text-[10px] tracking-widest text-accent uppercase">0{idx + 1}</span>
-                                    </div>
-                                    <div className="md:col-span-10">
-                                        <h3 className="text-2xl md:text-3xl font-light text-white mb-6 uppercase group-hover:text-accent transition-colors">
-                                            {work.title}
-                                        </h3>
-                                        <p className="text-white/40 leading-relaxed max-w-xl mb-4">
-                                            {work.description}
-                                        </p>
-                                        <span className="inline-block border border-white/5 py-1 px-3 bg-white/5 text-[9px] tracking-widest text-white/50 uppercase rounded-sm">
-                                            {work.category}
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                className="group py-12 border-b border-white/10 last:border-0 relative"
+                            >
+                                {/* Project Card */}
+                                <div className="relative">
+                                    {/* Number Badge */}
+                                    <div className="absolute -left-2 top-0 lg:-left-6">
+                                        <span className="text-5xl font-light text-white/[0.05] group-hover:text-white/10 transition-all">
+                                            {work.id}
                                         </span>
                                     </div>
+
+                                    {/* Content */}
+                                    <div className="relative space-y-6">
+                                        {/* Header */}
+                                        <div className="flex items-start justify-between gap-4">
+                                            <h3 className="text-xl lg:text-2xl xl:text-3xl font-light text-white leading-tight group-hover:text-white/80 transition-colors">
+                                                {work.title}
+                                            </h3>
+                                            <div className="flex-shrink-0">
+                                                <span className="inline-flex items-center px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[9px] tracking-wider text-white/50 uppercase">
+                                                    {work.category}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
+                                            {work.description}
+                                        </p>
+
+                                        {/* Result Badge */}
+                                        <div className="flex items-center space-x-3 pt-2">
+                                            <div className="flex items-center space-x-2 px-4 py-2 bg-white/[0.03] border border-white/10 rounded-lg">
+                                                <TrendingUp className="w-3 h-3 text-white/40" />
+                                                <span className="text-xs text-white/60 font-medium">{work.result}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </motion.div>
 
-                    {/* Gradient Overlay for smooth transition feeling */}
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20 md:block hidden"></div>
+                    {/* Gradient Overlays */}
+                    <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/50 to-transparent pointer-events-none z-20"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20"></div>
                 </div>
             </div>
         </section>

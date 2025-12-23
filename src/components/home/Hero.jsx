@@ -49,15 +49,6 @@ const Hero = () => {
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-[#0a0a09] to-black">
-            {/* Enhanced Background Effects */}
-            <div className="absolute inset-0">
-                <div className="absolute top-[15%] right-[15%] w-[700px] h-[700px] bg-white/[0.03] rounded-full blur-[140px] animate-pulse-slow"></div>
-                <div className="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px]"></div>
-
-                {/* Subtle Grid Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
-            </div>
-
             <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-20 pb-12">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Left Side: Content */}
@@ -134,11 +125,11 @@ const Hero = () => {
                             transition={{ delay: 1.5 }}
                             className="pt-8 border-t border-white/5"
                         >
-                            <p className="text-[10px] tracking-widest text-white/30 uppercase mb-3">Trusted By</p>
+                            <p className="text-[10px] tracking-widest text-white/50 uppercase mb-3">Trusted By</p>
                             <div className="flex items-center justify-center lg:justify-start space-x-8">
-                                <div className="text-white/20 text-xs font-light">Fortune 500 Companies</div>
-                                <div className="w-px h-4 bg-white/10"></div>
-                                <div className="text-white/20 text-xs font-light">Global Enterprises</div>
+                                <div className="text-white/40 text-xs font-light">Fortune 500 Companies</div>
+                                <div className="w-px h-4 bg-white/20"></div>
+                                <div className="text-white/40 text-xs font-light">Global Enterprises</div>
                             </div>
                         </motion.div>
                     </div>
