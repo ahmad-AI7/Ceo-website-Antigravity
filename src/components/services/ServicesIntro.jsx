@@ -101,30 +101,34 @@ const ServicesIntro = () => {
                     </motion.div>
 
                     {/* Right Column - Single Image Block */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative w-full max-w-md mx-auto rounded-3xl overflow-hidden group bg-black"
-                    >
-                        {/* Image */}
-                        <img
-                            src={sirNabeel}
-                            className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                            alt="Sheikh Nabeel - Executive Leadership"
-                        />
+                    <div className="relative h-[500px] lg:h-auto w-full flex items-end justify-center lg:justify-end">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative w-full max-w-md lg:absolute lg:right-0 lg:bottom-0 z-0"
+                        >
+                            {/* Image with Gradient Mask */}
+                            <div className="relative">
+                                <img
+                                    src={sirNabeel}
+                                    className="w-full h-auto object-contain mask-image-gradient"
+                                    alt="Sheikh Nabeel - Executive Leadership"
+                                    style={{
+                                        maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
+                                        WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)'
+                                    }}
+                                />
 
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                                {/* Bottom Fade Overlay for extra blending */}
+                                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                            </div>
 
-                        {/* Hover Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                        {/* Decorative Corner Glow */}
-                        <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-                        <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-gradient-to-tr from-white/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-                    </motion.div>
+                            {/* Decorative Glow */}
+                            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

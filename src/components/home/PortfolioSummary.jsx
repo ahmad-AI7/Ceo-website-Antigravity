@@ -1,10 +1,23 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const PortfolioSummary = () => {
     const targetRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const { scrollYProgress } = useScroll({
         target: targetRef,
     });
@@ -51,10 +64,10 @@ const PortfolioSummary = () => {
     const leftY = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
 
     return (
-        <section ref={targetRef} className="relative h-[300vh] bg-gradient-to-b from-black via-[#0a0a09] to-black">
-            <div className="sticky top-0 h-screen overflow-hidden flex flex-col lg:flex-row">
+        <section ref={targetRef} className="relative h-auto lg:h-[300vh] bg-gradient-to-b from-black via-[#0a0a09] to-black">
+            <div className="relative lg:sticky top-0 h-auto lg:h-screen overflow-visible lg:overflow-hidden flex flex-col lg:flex-row">
                 {/* Left Side: Fixed Header */}
-                <motion.div style={{ y: leftY }} className="w-full lg:w-2/5 p-8 lg:p-16 flex flex-col justify-start z-10 bg-gradient-to-br from-black to-[#0a0a09] h-full border-r border-white/5">
+                <motion.div style={isMobile ? {} : { y: leftY }} className="w-full lg:w-2/5 px-6 py-6 pb-2 lg:p-16 flex flex-col justify-start z-10 bg-gradient-to-br from-black to-[#0a0a09] h-auto lg:h-full border-b lg:border-b-0 lg:border-r border-white/5">
                     <div className="max-w-lg">
                         {/* Badge */}
                         <div className="inline-block mb-6">
@@ -73,7 +86,7 @@ const PortfolioSummary = () => {
                         </h2>
 
                         {/* Description */}
-                        <p className="text-base text-white/50 leading-relaxed mb-12">
+                        <p className="text-base text-white/50 leading-relaxed mb-4 lg:mb-12">
                             Delivering measurable results across operations, automation, and strategic growth initiatives for businesses worldwide.
                         </p>
 
@@ -99,15 +112,15 @@ const PortfolioSummary = () => {
                 </motion.div>
 
                 {/* Right Side: Scrolling List */}
-                <div className="w-full lg:w-3/5 h-full flex items-start relative overflow-hidden">
-                    <motion.div style={{ y }} className="w-full px-6 lg:px-12 xl:px-16 pt-8 lg:pt-12 pb-[10vh]">
+                <div className="w-full lg:w-3/5 h-auto lg:h-full flex items-start relative overflow-hidden">
+                    <motion.div style={isMobile ? {} : { y }} className="w-full px-4 lg:px-12 xl:px-16 pt-0 lg:pt-12 pb-[10vh]">
                         {works.map((work, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                className="group py-12 border-b border-white/10 last:border-0 relative"
+                                className="group py-6 lg:py-12 border-b border-white/10 last:border-0 relative"
                             >
                                 {/* Project Card */}
                                 <div className="relative">
@@ -119,7 +132,7 @@ const PortfolioSummary = () => {
                                     </div>
 
                                     {/* Content */}
-                                    <div className="relative space-y-6">
+                                    <div className="relative space-y-6 pl-12 lg:pl-16">
                                         {/* Header */}
                                         <div className="flex items-start justify-between gap-4">
                                             <h3 className="text-xl lg:text-2xl xl:text-3xl font-light text-white leading-tight group-hover:text-white/80 transition-colors">
