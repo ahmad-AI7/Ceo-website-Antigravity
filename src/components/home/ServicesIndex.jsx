@@ -3,6 +3,11 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
+import serviceStrategy from '../../assets/service-strategy.png';
+import serviceOperations from '../../assets/service-operations.png';
+import serviceCrm from '../../assets/service-crm.png';
+import serviceGrowth from '../../assets/service-growth.png';
+
 const ServicesIndex = () => {
     const targetRef = useRef(null);
     const contentRef = useRef(null);
@@ -34,29 +39,29 @@ const ServicesIndex = () => {
         {
             title: "Business Strategy & Brand Consulting",
             description: "Build a clear roadmap with actionable insights to scale your business, attract investors, and strengthen your market presence.",
-            image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
-            link: "/services/business-strategy",
+            image: serviceStrategy,
+            link: "/c-suite",
             number: "01"
         },
         {
             title: "Digital Operations & Project Management",
             description: "Streamline backend systems, automate workflows, and manage cross-functional teams with tools like ClickUp, Airtable, and Notion.",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-            link: "/services/digital-operations",
+            image: serviceOperations,
+            link: "/digital-business-transform",
             number: "02"
         },
         {
             title: "CRM Implementation & Account Management",
             description: "Optimize the entire client lifecycle using HubSpot, Salesforce, and Zoho to enhance retention and drive revenue.",
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-            link: "/services/crm-implementation",
+            image: serviceCrm,
+            link: "/services",
             number: "03"
         },
         {
             title: "Growth Marketing & Funnel Strategy",
             description: "Design and execute data-driven growth strategies focused on lead generation and brand visibility.",
-            image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop",
-            link: "/services/growth-marketing",
+            image: serviceGrowth,
+            link: "/services",
             number: "04"
         }
     ];

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import heroImage from '../../assets/hero.webp';
 
 const Hero = () => {
     const phrases = [
@@ -148,10 +149,15 @@ const Hero = () => {
                             {/* Image Container */}
                             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                                 <img
-                                    src="https://sheikhnabeel.com/wp-content/uploads/2025/05/Untitled-6.png"
+                                    src={heroImage}
                                     alt="Sheikh Nabeel - Strategic Advisor"
                                     className="w-full h-full object-cover object-top"
+                                    width="900"
+                                    height="600"
+                                    fetchPriority="high"
                                 />
+                                {/* Bottom Fade Gradient */}
+                                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
                             </div>
                         </motion.div>
                     </div>

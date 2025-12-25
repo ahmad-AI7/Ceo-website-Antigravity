@@ -3,10 +3,14 @@ import AboutSummary from '../components/home/AboutSummary';
 import ServicesIndex from '../components/home/ServicesIndex';
 import SkillsSection from '../components/home/SkillsSection';
 import PortfolioSummary from '../components/home/PortfolioSummary';
-import { Globe } from '../components/home/Globe/Globe';
+// Globe imported lazily below
 import WhyChooseMe from '../components/home/WhyChooseMe';
 import Testimonials from '../components/home/Testimonials';
 import LatestBlogs from '../components/home/LatestBlogs';
+
+import { Suspense, lazy } from 'react';
+
+const Globe = lazy(() => import('../components/home/Globe/Globe').then(module => ({ default: module.Globe })));
 
 const Home = () => {
     return (
@@ -16,7 +20,9 @@ const Home = () => {
             <ServicesIndex />
             <SkillsSection />
             <PortfolioSummary />
-            <Globe />
+            <Suspense fallback={<div className="h-96 w-full bg-black" />}>
+                <Globe />
+            </Suspense>
             <WhyChooseMe />
             <Testimonials />
             <LatestBlogs />

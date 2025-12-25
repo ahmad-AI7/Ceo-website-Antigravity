@@ -28,14 +28,14 @@ const WhyChooseMe = () => {
     ];
 
     return (
-        <section className="relative py-32 bg-gradient-to-b from-black via-[#0a0a09] to-black overflow-hidden">
+        <section className="relative py-12 bg-gradient-to-b from-black via-[#0a0a09] to-black overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0">
                 <div className="absolute top-1/2 right-1/4 w-[800px] h-[800px] bg-white/[0.02] rounded-full blur-[140px]"></div>
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
                     {/* Left Side - Image */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
@@ -74,7 +74,7 @@ const WhyChooseMe = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="space-y-8"
+                        className="space-y-6"
                     >
                         {/* Header */}
                         <div>
@@ -98,7 +98,7 @@ const WhyChooseMe = () => {
                         </div>
 
                         {/* Reasons List */}
-                        <div className="space-y-6">
+                        <div className="space-y-2">
                             {reasons.map((reason, idx) => {
                                 const Icon = reason.icon;
                                 return (
@@ -108,7 +108,7 @@ const WhyChooseMe = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.4 + idx * 0.1 }}
-                                        className="group flex items-start space-x-4 p-4 rounded-xl hover:bg-white/[0.02] transition-all duration-300"
+                                        className="group flex items-start space-x-4 p-3 rounded-xl hover:bg-white/[0.02] transition-all duration-300"
                                     >
                                         <div className="flex-shrink-0">
                                             <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300">

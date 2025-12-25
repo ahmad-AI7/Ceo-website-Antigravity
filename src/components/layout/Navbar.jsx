@@ -28,11 +28,10 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-            isScrolled
-                ? 'bg-black/95 backdrop-blur-xl py-3 shadow-lg shadow-black/50'
-                : 'bg-gradient-to-b from-black/60 to-transparent py-5'
-        }`}>
+        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled
+            ? 'bg-black/95 backdrop-blur-xl py-3 shadow-lg shadow-black/50'
+            : 'bg-gradient-to-b from-black/60 to-transparent py-5'
+            }`}>
             <div className="container mx-auto px-6 lg:px-12">
                 <div className="flex justify-between items-center">
                     {/* Logo */}
@@ -61,11 +60,10 @@ const Navbar = () => {
                             <Link
                                 key={link.name}
                                 to={link.path}
-                                className={`px-4 py-2 text-xs font-medium tracking-wide transition-all duration-300 rounded-md ${
-                                    location.pathname === link.path
-                                        ? 'text-white bg-white/5'
-                                        : 'text-white/70 hover:text-white hover:bg-white/5'
-                                }`}
+                                className={`px-4 py-2 text-xs font-medium tracking-wide transition-all duration-300 rounded-md ${location.pathname === link.path
+                                    ? 'text-white bg-white/5'
+                                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                                    }`}
                             >
                                 {link.name}
                             </Link>
@@ -108,11 +106,10 @@ const Navbar = () => {
                                         key={link.name}
                                         to={link.path}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`block px-4 py-3 text-sm font-medium transition-all rounded-md ${
-                                            location.pathname === link.path
-                                                ? 'text-white bg-white/10'
-                                                : 'text-white/70'
-                                        }`}
+                                        className={`block px-4 py-3 text-sm font-medium transition-all rounded-md ${location.pathname === link.path
+                                            ? 'text-white bg-white/10'
+                                            : 'text-white/70'
+                                            }`}
                                     >
                                         {link.name}
                                     </Link>
