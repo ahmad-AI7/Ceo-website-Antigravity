@@ -10,7 +10,7 @@ async function zoomFavicon() {
     console.log('Original image:', inputImage);
 
     // Zoom in by extracting the center portion and scaling up
-    // This creates a 2x zoom effect by taking the center 16x16 and scaling to 32x32
+    // This creates a 2x zoom effect by taffking the center 16x16 and scaling to 32x32
     const zoomed32 = await sharp('public/favicon-32x32.png')
       .extract({
         left: Math.floor(inputImage.width / 4),
