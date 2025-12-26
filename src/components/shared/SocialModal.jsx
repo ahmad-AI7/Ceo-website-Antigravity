@@ -1,7 +1,9 @@
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedinIn, FaYoutube, FaInstagram, FaTwitter, FaFacebookF, FaTimes } from 'react-icons/fa';
 import { BsArrowRight, BsCalendarCheck } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 
 const SocialModal = ({ isOpen, onClose }) => {
     const socialLinks = [
@@ -42,17 +44,19 @@ const SocialModal = ({ isOpen, onClose }) => {
         }
     ];
 
-    return (
+    if (typeof document === 'undefined') return null;
+
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
-                <>
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] flex items-center justify-center p-4"
+                        className="absolute inset-0 bg-black/80 backdrop-blur-md"
                     />
 
                     {/* Modal Content */}
@@ -60,7 +64,7 @@ const SocialModal = ({ isOpen, onClose }) => {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed z-[70] w-full max-w-2xl bg-[#0a0a09] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                        className="relative w-full max-w-2xl bg-[#0a0a09] border border-white/10 rounded-3xl overflow-hidden shadow-2xl z-10"
                     >
                         {/* Header Image/Banner */}
                         <div className="h-32 bg-gradient-to-r from-neutral-900 to-black relative overflow-hidden">
@@ -69,7 +73,7 @@ const SocialModal = ({ isOpen, onClose }) => {
 
                             <button
                                 onClick={onClose}
-                                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all"
+                                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all z-20"
                             >
                                 <FaTimes />
                             </button>
@@ -118,7 +122,7 @@ const SocialModal = ({ isOpen, onClose }) => {
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={`p-4 rounded-xl bg-white/[0.03] border border-white/5 flex flex-col items-center gap-3 hover:-translate-y-1 transition-all duration-300 group ${link.color} hover:text-white`}
+                                            className={`p - 4 rounded - xl bg - white / [0.03] border border - white / 5 flex flex - col items - center gap - 3 hover: -translate - y - 1 transition - all duration - 300 group ${link.color} hover: text - white`}
                                         >
                                             <link.icon className="text-xl text-white/70 group-hover:text-white transition-colors" />
                                             <div className="text-center">
@@ -131,10 +135,12 @@ const SocialModal = ({ isOpen, onClose }) => {
                             </div>
                         </div>
                     </motion.div>
-                </>
+                </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 };
 
 export default SocialModal;
+
