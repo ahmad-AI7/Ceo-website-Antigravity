@@ -5,6 +5,7 @@ import { SiUpwork } from 'react-icons/si';
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
 import { BsArrowUpRight, BsArrowRight } from 'react-icons/bs';
 import { useLocation, Link } from 'react-router-dom';
+import logo from '../../assets/sign.webp';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -191,7 +192,7 @@ const Footer = () => {
                     <div className="space-y-8 lg:col-span-1">
                         <div className="flex items-center gap-4">
                             <img
-                                src="https://sheikhnabeel.com/wp-content/uploads/2025/04/1-1-1536x1536.png"
+                                src={logo}
                                 alt="Sheikh Nabeel"
                                 className="w-14 h-14 rounded-full object-cover border-2 border-white/10 shadow-xl"
                             />
