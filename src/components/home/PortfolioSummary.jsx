@@ -1,27 +1,8 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const PortfolioSummary = () => {
-    const targetRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 1024);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-    });
-
     const works = [
         {
             title: "Scaled Operations for a Global eCommerce Brand",
@@ -60,14 +41,13 @@ const PortfolioSummary = () => {
         }
     ];
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-    const leftY = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
-
     return (
-        <section ref={targetRef} className="relative h-auto lg:h-[300vh] bg-gradient-to-b from-black via-[#0a0a09] to-black">
-            <div className="relative lg:sticky top-0 h-auto lg:h-screen overflow-visible lg:overflow-hidden flex flex-col lg:flex-row">
-                {/* Left Side: Fixed Header */}
-                <motion.div style={isMobile ? {} : { y: leftY }} className="w-full lg:w-2/5 px-6 py-6 pb-2 lg:p-16 flex flex-col justify-start z-10 bg-gradient-to-br from-black to-[#0a0a09] h-auto lg:h-full border-b lg:border-b-0 lg:border-r border-white/5">
+        <section className="bg-gradient-to-b from-black via-[#0a0a09] to-black py-12 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+                    {/* Left Side: Fixed Header */}
+                    <div className="lg:col-span-5">
+                        <div className="lg:sticky lg:top-32">
                     <div className="max-w-lg">
                         {/* Badge */}
                         <div className="inline-block mb-6">
@@ -91,7 +71,7 @@ const PortfolioSummary = () => {
                         </p>
 
                         {/* CTA */}
-                        <div className="hidden lg:block">
+                        <div className="mt-8">
                             <Link
                                 to="/portfolio"
                                 className="group inline-flex items-center space-x-3 px-6 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all duration-300"
@@ -100,72 +80,63 @@ const PortfolioSummary = () => {
                                 <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                             </Link>
                         </div>
-
-                        {/* Scroll Indicator */}
-                        <div className="mt-8 pt-6 hidden lg:block">
-                            <div className="flex items-center space-x-4">
-                                <span className="text-[10px] tracking-widest text-white/30 uppercase">Scroll to explore</span>
-                                <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent"></div>
-                            </div>
+                    </div>
                         </div>
                     </div>
-                </motion.div>
 
-                {/* Right Side: Scrolling List */}
-                <div className="w-full lg:w-3/5 h-auto lg:h-full flex items-start relative overflow-hidden">
-                    <motion.div style={isMobile ? {} : { y }} className="w-full px-4 lg:px-12 xl:px-16 pt-0 lg:pt-12 pb-[10vh]">
-                        {works.map((work, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                className="group py-6 lg:py-12 border-b border-white/10 last:border-0 relative"
-                            >
-                                {/* Project Card */}
-                                <div className="relative">
-                                    {/* Number Badge */}
-                                    <div className="absolute -left-2 top-0 lg:-left-6">
-                                        <span className="text-5xl font-light text-white/[0.05] group-hover:text-white/10 transition-all">
-                                            {work.id}
-                                        </span>
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="relative space-y-6 pl-12 lg:pl-16">
-                                        {/* Header */}
-                                        <div className="flex items-start justify-between gap-4">
-                                            <h3 className="text-xl lg:text-2xl xl:text-3xl font-light text-white leading-tight group-hover:text-white/80 transition-colors">
-                                                {work.title}
-                                            </h3>
-                                            <div className="flex-shrink-0">
-                                                <span className="inline-flex items-center px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[9px] tracking-wider text-white/50 uppercase">
-                                                    {work.category}
-                                                </span>
-                                            </div>
+                    {/* Right Side: Scrolling List */}
+                    <div className="lg:col-span-7">
+                        <div className="">
+                            {works.map((work, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="group py-6 lg:py-12 border-b border-white/10 last:border-0 relative"
+                                >
+                                    {/* Project Card */}
+                                    <div className="relative">
+                                        {/* Number Badge */}
+                                        <div className="absolute -left-2 top-0 lg:-left-6">
+                                            <span className="text-5xl font-light text-white/[0.05] group-hover:text-white/10 transition-all">
+                                                {work.id}
+                                            </span>
                                         </div>
 
-                                        {/* Description */}
-                                        <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
-                                            {work.description}
-                                        </p>
+                                        {/* Content */}
+                                        <div className="relative space-y-6 pl-12 lg:pl-16">
+                                            {/* Header */}
+                                            <div className="flex items-start justify-between gap-4">
+                                                <h3 className="text-xl lg:text-2xl xl:text-3xl font-light text-white leading-tight group-hover:text-white/80 transition-colors">
+                                                    {work.title}
+                                                </h3>
+                                                <div className="flex-shrink-0">
+                                                    <span className="inline-flex items-center px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[9px] tracking-wider text-white/50 uppercase">
+                                                        {work.category}
+                                                    </span>
+                                                </div>
+                                            </div>
 
-                                        {/* Result Badge */}
-                                        <div className="flex items-center space-x-3 pt-2">
-                                            <div className="flex items-center space-x-2 px-4 py-2 bg-white/[0.03] border border-white/10 rounded-lg">
-                                                <TrendingUp className="w-3 h-3 text-white/40" />
-                                                <span className="text-xs text-white/60 font-medium">{work.result}</span>
+                                            {/* Description */}
+                                            <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
+                                                {work.description}
+                                            </p>
+
+                                            {/* Result Badge */}
+                                            <div className="flex items-center space-x-3 pt-2">
+                                                <div className="flex items-center space-x-2 px-4 py-2 bg-white/[0.03] border border-white/10 rounded-lg">
+                                                    <TrendingUp className="w-3 h-3 text-white/40" />
+                                                    <span className="text-xs text-white/60 font-medium">{work.result}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                    {/* Gradient Overlays */}
-                    <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/30 to-transparent pointer-events-none z-20"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20"></div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

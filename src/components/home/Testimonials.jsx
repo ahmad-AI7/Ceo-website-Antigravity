@@ -7,6 +7,7 @@ const Testimonials = () => {
     const [isDragging, setIsDragging] = useState(false);
     const baseVelocity = -1; // Pixels per frame (negative = left movement)
     const containerRef = useRef(null);
+    const animationRef = useRef(null);
 
     const testimonials = [
         {
@@ -70,44 +71,48 @@ const Testimonials = () => {
 
         if (isHorizontalScroll) {
             e.preventDefault();
-            const currentX = x.get();
+            let currentX = x.get();
             const scrollAmount = e.deltaX * 1.5; // Adjust sensitivity
 
             // Calculate the width of one set of testimonials
             const cardWidth = 400 + 24; // card width + gap
             const setWidth = testimonials.length * cardWidth;
 
-            let newX = currentX - scrollAmount;
+            // Move the position
+            currentX -= scrollAmount;
 
             // Handle infinite loop wrapping
-            if (newX <= -setWidth) {
-                newX = newX + setWidth;
-            } else if (newX >= setWidth) {
-                newX = newX - setWidth;
+            if (currentX <= -setWidth) {
+                currentX = 0;
+            } else if (currentX >= 0) {
+                currentX = -setWidth;
             }
 
-            x.set(newX);
+            x.set(currentX);
         }
     };
 
     // Infinite scroll animation
     useAnimationFrame((t, delta) => {
         if (!isDragging) {
-            const currentX = x.get();
+            let currentX = x.get();
             const moveBy = baseVelocity * (delta / 16); // Normalize to 60fps
 
             // Calculate the width of one set of testimonials (approximately)
             const cardWidth = 400 + 24; // card width + gap
             const setWidth = testimonials.length * cardWidth;
 
-            // Reset position when we've scrolled one full set
+            // Move the position
+            currentX += moveBy;
+
+            // Reset position when we've scrolled one full set for seamless loop
             if (currentX <= -setWidth) {
-                x.set(currentX + setWidth);
-            } else if (currentX >= setWidth) {
-                x.set(currentX - setWidth);
-            } else {
-                x.set(currentX + moveBy);
+                currentX = 0;
+            } else if (currentX >= 0) {
+                currentX = -setWidth;
             }
+
+            x.set(currentX);
         }
     });
 
@@ -171,7 +176,19 @@ const Testimonials = () => {
                             dragMomentum={true}
                             dragTransition={{ power: 0.2, timeConstant: 200 }}
                             onDragStart={() => setIsDragging(true)}
-                            onDragEnd={() => setIsDragging(false)}
+                            onDragEnd={() => {
+                                setIsDragging(false);
+                                // Wrap position on drag end
+                                const currentX = x.get();
+                                const cardWidth = 400 + 24;
+                                const setWidth = testimonials.length * cardWidth;
+
+                                if (currentX <= -setWidth) {
+                                    x.set(0);
+                                } else if (currentX >= 0) {
+                                    x.set(-setWidth);
+                                }
+                            }}
                             whileTap={{ cursor: "grabbing" }}
                             className="flex gap-6 cursor-grab select-none"
                             style={{

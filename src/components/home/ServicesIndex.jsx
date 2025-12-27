@@ -8,10 +8,11 @@ import { services as servicesData } from '../../data/services';
 const ServicesIndex = () => {
     const targetRef = useRef(null);
     const contentRef = useRef(null);
-    const [xRange, setXRange] = useState(["0px", "0px"]);
+    const [xRange, setXRange] = useState(["0%", "0%"]);
 
     const { scrollYProgress } = useScroll({
         target: targetRef,
+        offset: ["start start", "end end"]
     });
 
     useEffect(() => {
@@ -19,8 +20,7 @@ const ServicesIndex = () => {
             if (contentRef.current) {
                 const contentWidth = contentRef.current.scrollWidth;
                 const windowWidth = window.innerWidth;
-                const buffer = windowWidth * 0.2;
-                const distance = contentWidth - windowWidth + buffer;
+                const distance = contentWidth - windowWidth;
                 setXRange(["0px", `-${distance}px`]);
             }
         };
@@ -35,8 +35,8 @@ const ServicesIndex = () => {
     const services = servicesData.filter(s => s.isHighlight);
 
     return (
-        <section className="bg-black py-20 lg:h-[300vh] lg:py-0 relative">
-            <div className="lg:sticky lg:top-0 flex flex-col lg:h-screen overflow-hidden">
+        <section ref={targetRef} className="bg-black py-20 lg:h-[300vh] lg:py-0 relative">
+            <div className="lg:sticky lg:top-0 flex flex-col lg:h-screen overflow-hidden will-change-transform">
                 {/* Header Section */}
                 <div className="pt-8 pb-8 px-6 lg:pt-16 lg:px-16">
                     <div className="inline-block mb-4">
@@ -50,7 +50,7 @@ const ServicesIndex = () => {
                 </div>
 
                 {/* Content Container */}
-                <div className="lg:flex-1 lg:flex lg:items-center relative">
+                <div className="lg:flex-1 lg:flex lg:items-center relative overflow-hidden">
                     {/* Mobile: Horizontal Scroll Snap | Desktop: Scroll Animation */}
                     <div className="lg:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-8 scrollbar-hide">
                         {services.map((service, idx) => (
@@ -60,7 +60,12 @@ const ServicesIndex = () => {
                         ))}
                     </div>
 
-                    <motion.div ref={contentRef} style={{ x }} className="hidden lg:flex gap-12 pl-16 pr-16">
+                    <motion.div
+                        ref={contentRef}
+                        style={{ x }}
+                        className="hidden lg:flex gap-12 pl-16 pr-16 will-change-transform"
+                        transition={{ type: "spring", stiffness: 100, damping: 30 }}
+                    >
                         {services.map((service, idx) => (
                             <div key={idx} className="w-[38vw] shrink-0">
                                 <ServiceCard service={service} />

@@ -68,7 +68,7 @@ const Hero = () => {
                                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-white leading-tight min-h-[6rem] lg:min-h-[8rem] flex flex-col justify-center">
                                     <span className="flex items-center justify-center lg:justify-start">
                                         <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                                            {displayText}<span className="inline-block w-[2px] lg:w-[3px] h-8 md:h-16 bg-white/80 animate-blink ml-1"></span>
+                                            {displayText}
                                         </span>
                                     </span>
                                 </h1>
