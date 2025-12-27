@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+
+import { services as servicesData } from '../../data/services';
 
 const ServicesIndex = () => {
     const targetRef = useRef(null);
@@ -16,9 +19,6 @@ const ServicesIndex = () => {
             if (contentRef.current) {
                 const contentWidth = contentRef.current.scrollWidth;
                 const windowWidth = window.innerWidth;
-                // We want the scroll to end such that the right edge of the content 
-                // is significantly away from the right edge of the screen to avoid cutoff.
-                // User requested reducing the gap to 20% of the screen width.
                 const buffer = windowWidth * 0.2;
                 const distance = contentWidth - windowWidth + buffer;
                 setXRange(["0px", `-${distance}px`]);
@@ -32,69 +32,83 @@ const ServicesIndex = () => {
 
     const x = useTransform(scrollYProgress, [0, 1], xRange);
 
-    const services = [
-        {
-            title: "Business Strategy & Brand Consulting",
-            description: "Build a clear roadmap with actionable insights to scale your business, attract investors, and strengthen your market presence.",
-            image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop",
-            link: "#"
-        },
-        {
-            title: "Digital Operations & Project Management",
-            description: "Streamline backend systems, automate workflows, and manage cross-functional teams with tools like ClickUp, Airtable, and Notion.",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop",
-            link: "#"
-        },
-        {
-            title: "CRM Implementation & Account Management",
-            description: "Optimize the entire client lifecycle using HubSpot, Salesforce, and Zoho to enhance retention and drive revenue.",
-            image: "https://images.unsplash.com/photo-1573161158332-514c30930da0?q=80&w=2000&auto=format&fit=crop",
-            link: "#"
-        },
-        {
-            title: "Growth Marketing & Funnel Strategy",
-            description: "Design and execute data-driven growth strategies focused on lead generation, and brand visibility.",
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
-            link: "#"
-        }
-    ];
+    const services = servicesData.filter(s => s.isHighlight);
 
     return (
-        <section ref={targetRef} className="relative h-[300vh] bg-white">
-            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                <div className="absolute top-10 left-10 z-10 mix-blend-difference">
-                    <p className="text-[10px] tracking-[0.5em] text-white font-bold uppercase mb-4">WHAT I DO</p>
-                    <h2 className="text-4xl font-light text-white uppercase tracking-tight">MY SERVICES & EXPERTISE</h2>
+        <section className="bg-black py-20 lg:h-[300vh] lg:py-0 relative">
+            <div className="lg:sticky lg:top-0 flex flex-col lg:h-screen overflow-hidden">
+                {/* Header Section */}
+                <div className="pt-8 pb-8 px-6 lg:pt-16 lg:px-16">
+                    <div className="inline-block mb-4">
+                        <span className="text-[10px] tracking-[0.3em] text-white/40 uppercase font-medium">What I Do</span>
+                        <div className="w-12 h-[1px] bg-gradient-to-r from-white/50 to-transparent mt-2"></div>
+                    </div>
+                    <h2 className="text-3xl lg:text-5xl font-light text-white tracking-tight leading-tight">
+                        Services &<br />
+                        <span className="text-white/60">Expertise</span>
+                    </h2>
                 </div>
 
-                <motion.div ref={contentRef} style={{ x }} className="flex gap-24 pl-24 pr-24">
-                    {services.map((service, idx) => (
-                        <div key={idx} className="relative h-[60vh] w-[80vw] md:w-[60vw] flex-shrink-0 flex flex-col md:flex-row bg-[#050505] overflow-hidden group">
-                            <div className="w-full md:w-1/2 h-full overflow-hidden">
-                                <img
-                                    src={service.image}
-                                    alt={service.title}
-                                    className="w-full h-full object-cover transition-all duration-700"
-                                />
+                {/* Content Container */}
+                <div className="lg:flex-1 lg:flex lg:items-center relative">
+                    {/* Mobile: Horizontal Scroll Snap | Desktop: Scroll Animation */}
+                    <div className="lg:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-8 scrollbar-hide">
+                        {services.map((service, idx) => (
+                            <div key={idx} className="snap-center shrink-0 w-[85vw]">
+                                <ServiceCard service={service} />
                             </div>
-                            <div className="w-full md:w-1/2 p-12 flex flex-col justify-center">
-                                <h3 className="text-2xl md:text-4xl font-light text-white mb-6 uppercase leading-tight">
-                                    {service.title}
-                                </h3>
-                                <p className="text-white/60 font-light leading-relaxed mb-8">
-                                    {service.description}
-                                </p>
-                                <a href={service.link} className="inline-flex items-center space-x-6 group/link text-white">
-                                    <span className="w-12 h-[1px] bg-white group-hover/link:w-20 transition-all duration-500"></span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] uppercase">/ LEARN MORE /</span>
-                                </a>
+                        ))}
+                    </div>
+
+                    <motion.div ref={contentRef} style={{ x }} className="hidden lg:flex gap-12 pl-16 pr-16">
+                        {services.map((service, idx) => (
+                            <div key={idx} className="w-[38vw] shrink-0">
+                                <ServiceCard service={service} />
                             </div>
-                        </div>
-                    ))}
-                </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
 };
+
+const ServiceCard = ({ service }) => (
+    <div className="relative aspect-[3/4] lg:aspect-auto lg:h-[65vh] bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden group">
+        {/* Image Section */}
+        <div className="relative h-1/2 overflow-hidden">
+            <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+        </div>
+
+        {/* Content Section */}
+        <div className="h-1/2 p-6 lg:p-10 flex flex-col justify-between">
+            <div>
+                <h3 className="text-xl lg:text-3xl font-light text-white mb-3 lg:mb-4 leading-tight">
+                    {service.title}
+                </h3>
+                <p className="text-sm text-white/60 leading-relaxed line-clamp-3 lg:line-clamp-none">
+                    {service.description}
+                </p>
+            </div>
+
+            {/* CTA Link */}
+            <Link
+                to={service.link}
+                className="group/link inline-flex items-center space-x-3 text-white self-start mt-4 lg:mt-6"
+                aria-label={`Learn more about ${service.title}`}
+            >
+                <span className="text-xs font-medium tracking-wide">Learn More</span>
+                <div className="flex items-center space-x-2">
+                    <div className="w-8 h-[1px] bg-white/40 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-300"></div>
+                    <ArrowRight className="w-4 h-4 text-white/40 group-hover/link:text-white group-hover/link:translate-x-1 transition-all duration-300" />
+                </div>
+            </Link>
+        </div>
+    </div>
+);
 
 export default ServicesIndex;

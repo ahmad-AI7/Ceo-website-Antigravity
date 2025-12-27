@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(magick:*)",
+      "Bash(convert:*)",
+      "Bash(npm install:*)",
+      "Bash(node convert-favicon.js:*)",
+      "Bash(node zoom-favicon.js:*)"
+    ]
+  }
+}
