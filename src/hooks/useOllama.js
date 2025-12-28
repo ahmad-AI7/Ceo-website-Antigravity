@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Ollama } from 'ollama';
+// import { Ollama } from 'ollama'; // REMOVED: Incompatible with browser build
 import { siteContext } from '../data/siteContext';
 
 export const useOllama = () => {
@@ -12,36 +12,34 @@ export const useOllama = () => {
 
         const apiKey = import.meta.env.VITE_OLLAMA_API_KEY;
 
-        // Prepare conversation history with system prompt
+        // Prepare conversation with system context
         const conversation = [
             { role: 'system', content: siteContext },
             ...messages
         ];
 
         try {
-            // Using the proxy path we set up in vite.config.js to avoid CORS
-            // The library allows setting the host. 
-            // We point it to our local server's proxy route.
-            const ollama = new Ollama({
-                host: window.location.origin + '/ollama-api',
+            // Using native fetch instead of SDK to avoid Node.js dependencies
+            const response = await fetch('/ollama-api/api/chat', {
+                method: 'POST',
                 headers: {
-                    Authorization: "Bearer " + apiKey,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
                 },
+                body: JSON.stringify({
+                    model: "gpt-oss:120b-cloud",
+                    messages: conversation,
+                    stream: false,
+                }),
             });
 
-            // Prepare conversation with system context
-            const conversation = [
-                { role: 'system', content: siteContext },
-                ...messages
-            ];
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `HTTP Error: ${response.status}`);
+            }
 
-            const response = await ollama.chat({
-                model: "gpt-oss:120b-cloud", // Using the cloud model name
-                messages: conversation,
-                stream: false, // Keep false for now to simplify UI
-            });
-
-            return response.message.content;
+            const data = await response.json();
+            return data.message.content;
 
         } catch (err) {
             console.error("Chat Error:", err);
@@ -52,4 +50,15 @@ export const useOllama = () => {
     };
 
     return { sendMessage, loading, error };
+};
+
+        } catch (err) {
+    console.error("Chat Error:", err);
+    return `System Error: ${err.message}. Please check console.`;
+} finally {
+    setLoading(false);
+}
+    };
+
+return { sendMessage, loading, error };
 };
