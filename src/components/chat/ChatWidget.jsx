@@ -41,7 +41,7 @@ const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
+        <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end font-sans">
 
             {/* Chat Window */}
             <AnimatePresence>
@@ -51,33 +51,33 @@ const ChatWidget = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="mb-4 bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-[90vw] sm:w-96 max-h-[600px] flex flex-col border border-gray-100 dark:border-gray-800 overflow-hidden"
-                        style={{ height: '500px' }}
+                        className="mb-4 bg-[#0a0a09]/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl w-[90vw] sm:w-96 overflow-hidden flex flex-col"
+                        style={{ height: '500px', boxShadow: '0 0 50px -12px rgba(23, 182, 178, 0.25)' }}
                     >
                         {/* Header */}
-                        <div className="bg-primary p-4 flex justify-between items-center text-white">
+                        <div className="p-4 flex justify-between items-center border-b border-white/10 bg-white/5">
                             <div className="flex items-center space-x-3">
                                 <div className="relative">
-                                    <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden border border-[#17b6b2]/30">
                                         <img
                                             src={avatarImage}
                                             alt="Nabeel AI"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#0a0a09] rounded-full"></div>
+                                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#17b6b2] border-2 border-[#0a0a09] rounded-full shadow-[0_0_8px_#17b6b2]"></div>
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-medium text-sm">Nabeel AI</h3>
-                                    <p className="text-white/40 text-[10px] flex items-center gap-1">
-                                        <div className="w-1 h-1 rounded-full bg-green-500"></div>
+                                    <h3 className="text-white font-medium text-sm tracking-wide">Nabeel AI</h3>
+                                    <p className="text-[#17b6b2] text-[10px] flex items-center gap-1 font-medium">
+                                        <div className="w-1 h-1 rounded-full bg-[#17b6b2] animate-pulse"></div>
                                         Online
                                     </p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+                                className="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white"
                                 aria-label="Close Chat"
                             >
                                 <X className="w-5 h-5" />
@@ -85,14 +85,14 @@ const ChatWidget = () => {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900/50">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                             {messages.map((msg, idx) => (
                                 <div
                                     key={idx}
                                     className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
                                     {msg.role === 'assistant' && (
-                                        <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-100 dark:border-gray-700 flex-shrink-0 mt-1">
+                                        <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10 flex-shrink-0 mt-1">
                                             <img
                                                 src={avatarImage}
                                                 alt="AI"
@@ -102,18 +102,18 @@ const ChatWidget = () => {
                                     )}
 
                                     <div className={`
-                    p-3 rounded-2xl text-sm max-w-[80%] whitespace-pre-wrap
+                    p-3.5 rounded-2xl text-sm max-w-[85%] whitespace-pre-wrap leading-relaxed
                     ${msg.role === 'user'
-                                            ? 'bg-primary text-white rounded-tr-none'
-                                            : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 rounded-tl-none shadow-sm'
+                                            ? 'bg-[#17b6b2] text-black font-medium rounded-tr-none shadow-[0_4px_20px_-5px_rgba(23,182,178,0.4)]'
+                                            : 'bg-white/5 text-gray-200 border border-white/10 rounded-tl-none'
                                         }
                   `}>
                                         {msg.content}
                                     </div>
 
                                     {msg.role === 'user' && (
-                                        <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                            <User className="w-4 h-4 text-gray-500" />
+                                        <div className="w-8 h-8 bg-[#17b6b2]/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-[#17b6b2]/20">
+                                            <User className="w-4 h-4 text-[#17b6b2]" />
                                         </div>
                                     )}
                                 </div>
@@ -121,16 +121,16 @@ const ChatWidget = () => {
 
                             {loading && (
                                 <div className="flex justify-start gap-3">
-                                    <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-100 dark:border-gray-700 flex-shrink-0 mt-1">
+                                    <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10 flex-shrink-0 mt-1">
                                         <img
                                             src={avatarImage}
                                             alt="AI"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl rounded-tl-none border border-gray-100 dark:border-gray-700 shadow-sm flex items-center gap-2">
-                                        <Loader2 className="w-4 h-4 text-primary animate-spin" />
-                                        <span className="text-xs text-gray-400">Thinking...</span>
+                                    <div className="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/10 flex items-center gap-2">
+                                        <Loader2 className="w-4 h-4 text-[#17b6b2] animate-spin" />
+                                        <span className="text-xs text-gray-400">Processing...</span>
                                     </div>
                                 </div>
                             )}
@@ -138,25 +138,25 @@ const ChatWidget = () => {
                         </div>
 
                         {/* Input Area */}
-                        <form onSubmit={handleSubmit} className="p-3 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
+                        <form onSubmit={handleSubmit} className="p-4 border-t border-white/10 bg-black/20">
                             <div className="relative flex items-center">
                                 <input
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder="Ask me anything..."
-                                    className="w-full pl-4 pr-12 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                                    placeholder="Type your message..."
+                                    className="w-full pl-4 pr-12 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#17b6b2]/50 focus:border-[#17b6b2]/50 text-sm text-white placeholder-gray-500 transition-all"
                                 />
                                 <button
                                     type="submit"
                                     disabled={!input.trim() || loading}
-                                    className="absolute right-2 p-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                    className="absolute right-2 p-2 bg-[#17b6b2] text-black rounded-lg hover:bg-[#15a3a0] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#17b6b2]/20"
                                 >
                                     <Send className="w-4 h-4" />
                                 </button>
                             </div>
-                            <div className="text-center mt-2">
-                                <p className="text-[10px] text-gray-400">Powered by Ollama Cloud AI</p>
+                            <div className="text-center mt-2.5">
+                                <p className="text-[10px] text-gray-600 font-medium tracking-wide uppercase">AI Assistant v1.0 • Powered by Antigravity</p>
                             </div>
                         </form>
                     </motion.div>
@@ -168,7 +168,7 @@ const ChatWidget = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="h-14 w-14 bg-primary text-white rounded-full shadow-lg hover:shadow-primary/30 flex items-center justify-center transition-all duration-300 z-50"
+                className="h-14 w-14 bg-[#17b6b2] text-black rounded-full shadow-[0_0_30px_-5px_rgba(23,182,178,0.6)] hover:shadow-[0_0_40px_-5px_rgba(23,182,178,0.8)] flex items-center justify-center transition-all duration-300 z-50 border border-white/20"
                 aria-label="Toggle Chat"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
