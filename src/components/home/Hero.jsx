@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import heroImage from '../../assets/hero.webp';
 
 const Hero = () => {
     const phrases = [
-        "EXCEL AS A BOARD",
-        "DRIVE AI STEWARDSHIP",
-        "TRANSFORM YOUR BUSINESS",
-        "ADVISE C-SUITE LEADERS"
+        "Excel as a Board",
+        "Drive AI Stewardship",
+        "Transform Your Business",
+        "Advise C-Suite Leaders"
     ];
 
     const [index, setIndex] = useState(0);
@@ -39,47 +42,129 @@ const Hero = () => {
         return () => clearTimeout(timer);
     }, [displayText, isDeleting, index, typingSpeed]);
 
+    const highlights = [
+        "7+ Years Leadership Experience",
+        "Board & C-Suite Advisory",
+        "Digital Transformation Expert"
+    ];
+
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a09]">
-            {/* Background Subtle Radial Glow */}
-            <div className="absolute inset-0">
-                <div className="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-white/5 rounded-full blur-[140px]"></div>
-            </div>
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-[#0a0a09] to-black">
+            <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-32 pb-12 lg:pt-20">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    {/* Left Side: Content */}
+                    <div className="text-center lg:text-left space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-6"
+                        >
+                            {/* Main Heading */}
+                            <div className="space-y-4">
+                                <h2 className="text-sm text-white/50 font-light tracking-wide">
+                                    Helping C-Suite Leaders & Boards
+                                </h2>
+                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-white leading-tight min-h-[6rem] lg:min-h-[8rem] flex flex-col justify-center">
+                                    <span className="flex items-center justify-center lg:justify-start">
+                                        <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                                            {displayText}
+                                        </span>
+                                    </span>
+                                </h1>
+                            </div>
 
-            <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between">
-                {/* Left Side: Typewriter Text */}
-                <div className="w-full md:w-[55%] text-center md:text-left z-20">
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-[10px] tracking-[0.5em] text-white/40 mb-10 uppercase font-medium"
-                    >
-                        WE HELP YOU
-                    </motion.p>
+                            {/* Description */}
+                            <p className="text-base text-white/60 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Navigating digital transformation, AI governance, and strategic growth for sustainable success in a complex global market.
+                            </p>
 
-                    <h1 className="text-2xl md:text-[3rem] font-light tracking-tighter text-white mb-8 h-20 md:h-auto min-h-[6rem] md:min-h-[8rem] flex items-center justify-center md:justify-start leading-tight">
-                        <span className="inline-block whitespace-nowrap">{displayText}</span>
-                        <span className="inline-block w-[2px] h-8 md:h-12 bg-white/80 animate-blink ml-3"></span>
-                    </h1>
+                            {/* Highlights */}
+                            <div className="space-y-3 pt-4">
+                                {highlights.map((item, idx) => (
+                                    <motion.div
+                                        key={item}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.8 + idx * 0.1 }}
+                                        className="flex items-center justify-center lg:justify-start space-x-3"
+                                    >
+                                        <CheckCircle2 className="w-4 h-4 text-white/40" />
+                                        <span className="text-xs text-white/50 tracking-wide">{item}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.2 }}
+                            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4"
+                        >
+                            <Link
+                                to="/appointment"
+                                className="group relative px-8 py-4 bg-white text-black text-sm font-semibold tracking-wide rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-white/20 flex items-center space-x-2"
+                            >
+                                <span>Schedule Consultation</span>
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+
+                            <Link
+                                to="/services"
+                                className="px-8 py-4 bg-white/5 text-white text-sm font-medium tracking-wide rounded-lg border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
+                            >
+                                Explore Services
+                            </Link>
+                        </motion.div>
+
+                        {/* Trust Badge */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1.5 }}
+                            className="pt-8 border-t border-white/5"
+                        >
+                            <p className="text-[10px] tracking-widest text-white/70 uppercase mb-3">Trusted By</p>
+                            <div className="flex items-center justify-center lg:justify-start space-x-8">
+                                <div className="text-white/70 text-xs font-light">Fortune 500 Companies</div>
+                                <div className="w-px h-4 bg-white/30"></div>
+                                <div className="text-white/70 text-xs font-light">Global Enterprises</div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Side: Portrait */}
+                    <div className="relative flex justify-center lg:justify-end">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="relative w-full max-w-lg"
+                        >
+                            {/* Glow Effect Behind Image */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/5 rounded-2xl blur-3xl"></div>
+
+                            {/* Image Container */}
+                            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                                <img
+                                    src={heroImage}
+                                    alt="Sheikh Nabeel - Strategic Advisor"
+                                    className="w-full h-full object-cover object-top"
+                                    width="900"
+                                    height="600"
+                                    fetchPriority="high"
+                                />
+                                {/* Bottom Fade Gradient */}
+                                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
+            </div >
 
-                {/* Right Side: Portrait */}
-                <div className="w-full md:w-[45%] relative mt-12 md:mt-0 flex justify-end">
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="relative w-full max-w-lg aspect-[5/6]"
-                    >
-                        <img
-                            src="https://sheikhnabeel.com/wp-content/uploads/2025/05/Untitled-6.png"
-                            alt="Sheikh Nabeel"
-                            className="w-full h-full object-cover object-top mask-image-fade"
-                        />
-                    </motion.div>
-                </div>
-            </div>
-        </section>
+        </section >
     );
 };
 
