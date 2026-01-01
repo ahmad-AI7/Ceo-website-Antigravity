@@ -2,10 +2,10 @@
   "rewrites": [
     {
       "source": "/ollama-api/:path*",
-      "destination": "https://ollama.com/:path*"
+      "destination": "ollama.com*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/|static/|assets/|favicon.ico|_next/|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
