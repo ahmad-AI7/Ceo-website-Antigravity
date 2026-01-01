@@ -106,7 +106,10 @@ const Navbar = () => {
                                     <Link
                                         key={link.name}
                                         to={link.path}
-                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        onClick={(e) => {
+                                            if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+                                            setIsMobileMenuOpen(false);
+                                        }}
                                         className={`block px-4 py-3 text-sm font-medium transition-all rounded-md ${location.pathname === link.path
                                             ? 'text-white bg-white/10'
                                             : 'text-white/70'
@@ -118,7 +121,10 @@ const Navbar = () => {
 
                                 <Link
                                     to="/appointment"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    onClick={(e) => {
+                                        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+                                        setIsMobileMenuOpen(false);
+                                    }}
                                     className="block w-full mt-4 px-4 py-3 bg-white text-black text-sm font-semibold text-center rounded-md hover:bg-white/90 transition-all"
                                 >
                                     Book Consultation

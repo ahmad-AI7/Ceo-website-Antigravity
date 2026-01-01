@@ -43,15 +43,19 @@ const ServiceDetail = () => {
 
             <div className="container mx-auto px-6 lg:px-12 relative z-10 py-12 lg:py-20">
                 {/* Back Button */}
-                <motion.button
+                <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    onClick={() => navigate('/services')}
-                    className="group inline-flex items-center gap-2 text-white/50 hover:text-white mb-12 transition-colors duration-300"
+                    className="mb-12"
                 >
-                    <BsArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm tracking-widest uppercase font-medium">Back to Services</span>
-                </motion.button>
+                    <Link
+                        to="/services"
+                        className="group inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300"
+                    >
+                        <BsArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-sm tracking-widest uppercase font-medium">Back to Services</span>
+                    </Link>
+                </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                     {/* Left Column: Hero & Info */}
