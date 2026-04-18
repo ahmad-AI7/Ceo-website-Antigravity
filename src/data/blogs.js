@@ -1,5 +1,5 @@
-import blogSeo from '../assets/blog-seo-trends.png';
-import blogAi from '../assets/blog-ai-business.png';
+import blogSeo from '../assets/blog-seo-trends.webp';
+import blogAi from '../assets/blog-ai-business.webp';
 
 // Placeholder images for new blogs - utilizing original sci-fi/abstract assets
 const blogGovernance = blogAi;

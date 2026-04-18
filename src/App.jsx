@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'; // Force HMR update
 import Footer from './components/layout/Footer';
@@ -20,13 +20,23 @@ const Contact = lazy(() => import('./pages/Contact'));
 import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
+    const [showChat, setShowChat] = useState(false);
+
+    useEffect(() => {
+        // Defer chat widget to improve TBT and performance
+        const timer = setTimeout(() => {
+            setShowChat(true);
+        }, 2000); // Wait 2 seconds or until idle
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <Router>
             <ScrollToTop />
             <div className="bg-black min-h-screen text-white selection:bg-accent selection:text-white flex flex-col">
                 <Navbar />
                 <main className="flex-grow">
-                    <ChatWidget /> {/* Chatbot Component */}
+                    {showChat && <ChatWidget />} {/* Deferred Chatbot Component */}
                     <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white">Loading...</div>}>
                         <Routes>
                             <Route path="/" element={<Home />} />

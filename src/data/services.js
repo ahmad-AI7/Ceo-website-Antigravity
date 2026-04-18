@@ -1,7 +1,7 @@
-import serviceStrategy from '../assets/service-strategy.png';
-import serviceOperations from '../assets/service-operations.png';
-import serviceCrm from '../assets/service-crm.png';
-import serviceGrowth from '../assets/service-growth.png';
+import serviceStrategy from '../assets/service-strategy.webp';
+import serviceOperations from '../assets/service-operations.webp';
+import serviceCrm from '../assets/service-crm.webp';
+import serviceGrowth from '../assets/service-growth.webp';
 
 export const services = [
     // Highlighted Services (Used on Home)

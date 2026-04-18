@@ -45,6 +45,8 @@ const Navbar = () => {
                             <img
                                 src="/chat-logo.png"
                                 alt="Sheikh Nabeel"
+                                width="44"
+                                height="44"
                                 className="w-11 h-11 rounded-full object-cover border border-white/30 relative z-10 shadow-lg"
                             />
                         </motion.div>

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Target, Zap, Users, Award } from 'lucide-react';
-import sirNabeel from '../../assets/sn.png';
+import sirNabeel from '../../assets/sn.webp';
 
 const WhyChooseMe = () => {
     const reasons = [
@@ -48,6 +48,7 @@ const WhyChooseMe = () => {
                             <img
                                 src={sirNabeel}
                                 alt="Sheikh Nabeel"
+                                loading="lazy"
                                 className="w-full h-full object-cover object-top"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
