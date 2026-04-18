@@ -1,15 +1,12 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/ollama-api/(.*)",
-      "dest": "https://ollama.com/$1"
+      "source": "/ollama-api/:path*",
+      "destination": "https://ollama.com/:path*"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
