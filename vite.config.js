@@ -7,11 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-icons': ['lucide-react', 'react-icons'],
-        },
+        // Letting Vite handle chunking for better mobile performance balance
       },
     },
     chunkSizeWarningLimit: 1000,

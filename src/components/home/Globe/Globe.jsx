@@ -15,7 +15,7 @@ const GLOBE_CONFIG = {
   theta: 0.3,
   dark: 1,
   diffuse: 0.4,
-  mapSamples: 12000,
+  mapSamples: typeof window !== 'undefined' && window.innerWidth < 768 ? 4000 : 12000,
   mapBrightness: 6,
   baseColor: [1, 1, 1],
   markerColor: [0, 1, 1],

@@ -2,7 +2,7 @@ import { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'; // Force HMR update
 import Footer from './components/layout/Footer';
-import ChatWidget from './components/chat/ChatWidget'; // Chatbot Import
+const ChatWidget = lazy(() => import('./components/chat/ChatWidget')); // Properly Lazy Load Chatbot
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
@@ -26,7 +26,7 @@ function App() {
         // Defer chat widget to improve TBT and performance
         const timer = setTimeout(() => {
             setShowChat(true);
-        }, 2000); // Wait 2 seconds or until idle
+        }, 5000); // 5s delay to ensure mobile interactivity first
         return () => clearTimeout(timer);
     }, []);
 
@@ -36,7 +36,9 @@ function App() {
             <div className="bg-black min-h-screen text-white selection:bg-accent selection:text-white flex flex-col">
                 <Navbar />
                 <main className="flex-grow">
-                    {showChat && <ChatWidget />} {/* Deferred Chatbot Component */}
+                    <Suspense fallback={null}>
+                        {showChat && <ChatWidget />} {/* Deferred & Lazy Loaded Chatbot */}
+                    </Suspense>
                     <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white">Loading...</div>}>
                         <Routes>
                             <Route path="/" element={<Home />} />
