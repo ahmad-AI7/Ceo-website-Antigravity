@@ -2,7 +2,6 @@ import { m } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import heroImage from '../../assets/hero.webp';
 
 const Hero = () => {
     const phrases = [
@@ -154,7 +153,7 @@ const Hero = () => {
                             {/* Image Container */}
                             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                                 <img
-                                    src={heroImage}
+                                    src="/hero-portrait.webp"
                                     alt="Sheikh Nabeel - Strategic Advisor"
                                     className="w-full h-full object-cover object-top"
                                     width="900"
