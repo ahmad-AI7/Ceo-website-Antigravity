@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -60,7 +60,7 @@ const ServicesIndex = () => {
                         ))}
                     </div>
 
-                    <motion.div
+                    <m.div
                         ref={contentRef}
                         style={{ x }}
                         className="hidden lg:flex gap-12 pl-16 pr-16 will-change-transform"
@@ -71,7 +71,7 @@ const ServicesIndex = () => {
                                 <ServiceCard service={service} />
                             </div>
                         ))}
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </section>

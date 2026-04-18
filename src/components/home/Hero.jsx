@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -38,8 +38,13 @@ const Hero = () => {
             }
         };
 
-        const timer = setTimeout(handleType, typingSpeed);
-        return () => clearTimeout(timer);
+        // Delay starting the typing effect to improve TBT on mobile
+        const startDelay = setTimeout(() => {
+            const timer = setTimeout(handleType, typingSpeed);
+            return () => clearTimeout(timer);
+        }, displayText === "" && index === 0 ? 3000 : 0);
+
+        return () => clearTimeout(startDelay);
     }, [displayText, isDeleting, index, typingSpeed]);
 
     const highlights = [
@@ -54,7 +59,7 @@ const Hero = () => {
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     {/* Left Side: Content */}
                     <div className="text-center lg:text-left space-y-8">
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
@@ -82,7 +87,7 @@ const Hero = () => {
                             {/* Highlights */}
                             <div className="space-y-3 pt-4">
                                 {highlights.map((item, idx) => (
-                                    <motion.div
+                                    <m.div
                                         key={item}
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
@@ -91,13 +96,13 @@ const Hero = () => {
                                     >
                                         <CheckCircle2 className="w-4 h-4 text-white/40" />
                                         <span className="text-xs text-white/50 tracking-wide">{item}</span>
-                                    </motion.div>
+                                    </m.div>
                                 ))}
                             </div>
-                        </motion.div>
+                        </m.div>
 
                         {/* CTA Buttons */}
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2 }}
@@ -117,10 +122,10 @@ const Hero = () => {
                             >
                                 Explore Services
                             </Link>
-                        </motion.div>
+                        </m.div>
 
                         {/* Trust Badge */}
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1.5 }}
@@ -132,12 +137,12 @@ const Hero = () => {
                                 <div className="w-px h-4 bg-white/30"></div>
                                 <div className="text-white/70 text-xs font-light">Global Enterprises</div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     </div>
 
                     {/* Right Side: Portrait */}
                     <div className="relative flex justify-center lg:justify-end">
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, ease: "easeOut" }}
@@ -159,7 +164,7 @@ const Hero = () => {
                                 {/* Bottom Fade Gradient */}
                                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     </div>
                 </div>
             </div >

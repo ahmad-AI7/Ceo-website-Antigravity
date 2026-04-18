@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-3 group">
-                        <motion.div
+                        <m.div
                             className="relative"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
@@ -49,7 +49,7 @@ const Navbar = () => {
                                 height="44"
                                 className="w-11 h-11 rounded-full object-cover border border-white/30 relative z-10 shadow-lg"
                             />
-                        </motion.div>
+                        </m.div>
                         <div className="flex flex-col">
                             <span className="text-xl font-semibold tracking-tight text-white leading-none">Sheikh Nabeel</span>
                             <span className="text-[9px] tracking-[0.2em] text-white/50 uppercase mt-0.5">Strategic Advisor</span>
@@ -81,21 +81,21 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Toggle */}
-                    <motion.button
+                    <m.button
                         className="lg:hidden text-white p-2 hover:bg-white/5 rounded-md transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         whileTap={{ scale: 0.95 }}
                         aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
                     >
                         {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </motion.button>
+                    </m.button>
                 </div>
             </div>
 
             {/* Mobile Menu */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
@@ -133,7 +133,7 @@ const Navbar = () => {
                                 </Link>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </nav>

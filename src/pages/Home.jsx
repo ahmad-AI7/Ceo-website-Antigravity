@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import Hero from '../components/home/Hero';
 import SEO from '../components/shared/SEO';
 
@@ -15,6 +16,27 @@ const LatestBlogs = lazy(() => import('../components/home/LatestBlogs'));
 const Newsletter = lazy(() => import('../components/shared/Newsletter'));
 
 const Home = () => {
+    const [globeInView, setGlobeInView] = useState(false);
+    const globeRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setGlobeInView(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '200px' } // Load slightly before it comes into view
+        );
+
+        if (globeRef.current) {
+            observer.observe(globeRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <>
             <SEO
@@ -27,9 +49,13 @@ const Home = () => {
             <ServicesIndex />
             <SkillsSection />
             <PortfolioSummary />
-            <Suspense fallback={<div className="h-[50vh] lg:h-96 w-full bg-black" />}>
-                <Globe />
-            </Suspense>
+            <div ref={globeRef}>
+                {globeInView && (
+                    <Suspense fallback={<div className="h-[50vh] lg:h-96 w-full bg-black" />}>
+                        <Globe />
+                    </Suspense>
+                )}
+            </div>
             <WhyChooseMe />
             <Testimonials />
             <LatestBlogs />
