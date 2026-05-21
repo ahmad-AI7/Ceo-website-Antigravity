@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      # Pass through the API key if needed
+      - VITE_OLLAMA_API_KEY=${VITE_OLLAMA_API_KEY:-}
+    volumes:
+      # Optional: Mount local files for hot-reloading if they edit code
+      # Remove this volume block if you just want to run the snapshot
+      - .:/app
+      - /app/node_modules
